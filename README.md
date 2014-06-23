@@ -2,7 +2,7 @@ SimpleTwitterClient
 ===================
 1.Hours Spent : 13 hrs
 
-2.    User Stories:
+2.User Stories:
 * [x] User can sign in using OAuth login flow
 * [x] User can view last 25 tweets from their home timeline
 * [x] User should be able to see the user, body and timestamp for tweet
@@ -16,4 +16,4 @@ SimpleTwitterClient
 * [x] User should be taken back to home timeline with new tweet visible
 - [ ] Optional: User can see a counter with total number of characters left for tweet
 
-3. ![Video Walkthrough](SimpleTwitterClient/twitterClient.gif)
+3.![Video Walkthrough](SimpleTwitterClient/twitterClient.gif)
