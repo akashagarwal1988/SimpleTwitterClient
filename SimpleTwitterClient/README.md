@@ -17,4 +17,4 @@ SimpleTwitterClient-Part 2
 - [X] Profile view should include that user's timeline
 - [ ] Optional: User can view following / followers list through the profile
 
-3.![Video Walkthrough](SimpleTwitterClient/twitterClient-Part2.gif)
+3.![Video Walkthrough](twitterClient-Part2.gif)
