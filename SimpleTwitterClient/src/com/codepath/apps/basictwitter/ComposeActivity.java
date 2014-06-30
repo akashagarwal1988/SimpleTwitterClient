@@ -1,85 +1,33 @@
 package com.codepath.apps.basictwitter;
 
-import org.json.JSONObject;
-
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
+import android.view.View;
 import android.widget.Toast;
 
-import com.codepath.apps.basictwitter.models.Tweet;
-import com.codepath.apps.basictwitter.models.User;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.codepath.apps.basictwitter.fragments.ComposeFragment;
 
-public class ComposeActivity extends Activity {
+public class ComposeActivity extends FragmentActivity {
 
-	private TwitterClient client;
-	EditText etTweet;
-	ImageView ivMyImage;
-	TextView tvName;
-	TextView tvHandle;
-	User user;
 	
+	ComposeFragment composeFragment;
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	protected void onCreate(Bundle arg0) {
+		// TODO Auto-generated method stub
+		super.onCreate(arg0);
 		setContentView(R.layout.activity_compose);
-		etTweet = (EditText) findViewById(R.id.etTweet);
-		ivMyImage = (ImageView) findViewById(R.id.ivMyImage);
-		tvName = (TextView) findViewById(R.id.tvName);
-		tvHandle = (TextView) findViewById(R.id.tvHandle);
-		client = TwitterApplication.getRestClient();
-		getData();
+		composeFragment = new ComposeFragment();
+		// Begin the transaction
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		// Replace the container with the new fragment
+		ft.replace(R.id.fragmentCompose, composeFragment);
+		// or ft.add(R.id.your_placeholder, new FooFragment());
+		// Execute the changes specified
+		ft.commit();
 		
 	}
-	public void getData() {
-		client.getMyInfo(new JsonHttpResponseHandler(){
-
-			@Override
-			public void onSuccess(JSONObject json) {
-				user = User.fromJson(json);
-				tvName.setText(user.getName());
-				tvHandle.setText("@" + user.getScreenName());
-				ImageLoader imageLoader = ImageLoader.getInstance();
-				
-				imageLoader.displayImage(user.getProfileImageUrl(), ivMyImage);
-			}
-			
-		});
+	public void onTweet(View v){
+		composeFragment.onTweet(v);
 	}
-	public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_tweet, menu);
-        return true;
-    }
-	
-	public void onTweet(MenuItem mi){
-		client.postTweet(new JsonHttpResponseHandler(){
-			@Override
-			public void onFailure(Throwable e, String s) {
-				Log.d("debug", e.toString());
-				Log.d("debug", s.toString());
-				Toast.makeText(getApplicationContext(), "Post Failed !", Toast.LENGTH_SHORT).show();
-			}
-			
-			@Override
-			public void onSuccess(JSONObject json) {				
-				Intent intent = new Intent();
-				setResult(RESULT_OK, intent);
-				finish();
-				
-				
-			}
-		}, etTweet.getText().toString());
-		
-		
-	}
-	
 }

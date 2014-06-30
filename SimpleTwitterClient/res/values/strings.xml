@@ -9,5 +9,6 @@
     <string name="foo_label">\@foo</string>
     <string name="title_activity_time_line">TimeLineActivity</string>
     <string name="title_activity_compose">ComposeActivity</string>
+    <string name="title_activity_profile">ProfileActivity</string>
 
 </resources>

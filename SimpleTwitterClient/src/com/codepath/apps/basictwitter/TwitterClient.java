@@ -5,6 +5,7 @@ import org.scribe.builder.api.TwitterApi;
 
 import android.content.Context;
 
+import com.codepath.apps.basictwitter.models.User;
 import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -77,4 +78,23 @@ public class TwitterClient extends OAuthBaseClient {
 	 *    i.e client.get(apiUrl, params, handler);
 	 *    i.e client.post(apiUrl, params, handler);
 	 */
+
+	public void getMentionsTimeLine(AsyncHttpResponseHandler handler) {
+		String apiUrl = getApiUrl("statuses/mentions_timeline.json");
+		client.get(apiUrl, null, handler);
+		
+	}
+
+	public void getUserTimeLine(AsyncHttpResponseHandler handler, String screenName) {
+		String apiUrl = getApiUrl("statuses/user_timeline.json?screen_name=" + screenName);
+		client.get(apiUrl, null, handler);
+		
+	}
+
+	public void getUserInfo(AsyncHttpResponseHandler handler,
+			String screenName) {
+		String url = getApiUrl("users/show.json?screen_name=" +screenName + "&include_entities=true");
+    	client.get(url,null,handler);
+		
+	}
 }
