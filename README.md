@@ -1,6 +1,6 @@
-SimpleTwitterClient
+SimpleTwitterClient-Part 2
 ===================
-1.Hours Spent : 13 hrs
+1.Hours Spent : 7-8 hrs
 
 2.User Stories:
 
